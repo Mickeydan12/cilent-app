@@ -33,11 +33,12 @@ function App() {
             <Route path="/admin-dashboard/payroll" element={<PayRoll />} />
             <Route path="/admin-dashboard/settings" element={<Settings />} />
           </Route>
-            <Route path="/admin-dashboard/newtask" element={<Newtask />} />
-            <Route path="/addtopayroll" element={<Addtopayrollt/>}/>
+          <Route path="/admin-dashboard/newtask" element={<Newtask />} />
+          <Route path="/addtopayroll" element={<Addtopayrollt />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
+    
     </>
   );
 }
