@@ -13,6 +13,7 @@
     min-height: 100vh;
    background-image: url( "../assets/1881 1.svg");
    background-repeat: no-repeat;
+   background-size: cover;
 }
  .wrapper{
     position: relative;
