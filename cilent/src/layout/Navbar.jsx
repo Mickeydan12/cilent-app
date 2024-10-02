@@ -13,7 +13,7 @@ import Offcanvas from "../component/Offcanvas";
 const Navbar = () => {
   return (
     <>
-      <nav className="d-flex justify-content-between navbar-container">
+      <nav className="d-flex justify-content-between navbar-container container">
         <div className="d-md-none">
           {["start"].map((placement, idx) => (
             <Offcanvas key={idx} placement={placement} name={placement} />
