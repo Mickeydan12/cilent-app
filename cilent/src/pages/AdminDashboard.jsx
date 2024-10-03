@@ -1,68 +1,78 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Outlet } from "react-router-dom";
 import { sidebarLinks } from "../db";
-import Hrlogo from "../assets/Frame 1000003286.svg";
-import arrowup from "../assets/Vector.svg";
-import arrowdown from "../assets/Vector (1).svg";
-import { NavLink, Outlet } from "react-router-dom";
-import Navbar from "../layout/Navbar";
-import "../styles/AdminDashboard.css";
-
+import logo from "../assets/logo-svg.svg";
+import arrowUp from "../assets/Vector.svg";
+import arrowDown from "../assets/Vector (1).svg";
+import "../Styles/AdminDashboard.css";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import NavBar from "../layout/NavBar";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 const AdminDashboard = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <>
-      <main className="container-fluid">
-        <section className="admin-dashboard-main">
-          <section className="admin-dashboard-section-1 py-3">
-            <div className="d-flex gap-2 pb-2">
-              <div>
-                <img src={Hrlogo} alt="hr-logo" />
-              </div>
-              <div className="d-flex justify-content-between gap-5">
-                <div className="hr-manager">
-                  <h1>HR manger</h1>
-                  <p>hrmanager@yahoo.com</p>
-                </div>
-                <div className="arrow">
-                  <div>
-                    <img src={arrowup} alt="arrow-up" />
-                  </div>
-                  <div>
-                    <img src={arrowdown} alt="arrow-down" />
-                  </div>
-                </div>
+      <main className="container-fluid d-flex admin-main">
+        {/* main-section */}
+        <section className=" admin-body d-none d-md-block d-flex row">
+          {/* Logo */}
+          <div className="d-flex justify-content-between align-items-center mb-5">
+            <div className="d-flex gap-2 ">
+              <img src={logo} alt="logo" className="logo-dash" />
+              <div className="pt-3">
+                <h2 className="h2-admin m-0">HR Manger</h2>
+                <p className="p-admin">hrmanager@yahoo.com</p>
               </div>
             </div>
-
-            {/* ---------------------------- */}
-            <div className="py-3">
-              <h3 className="main pt-4 ">MAIN MENU</h3>
+            {/* ARROW */}
+            <div className="ms-2">
               <div>
-                {sidebarLinks.map((sidebarLinks) => {
-                  const { id, path, icon, name } = sidebarLinks;
-                  return (
-                    <NavLink key={id} to={path} end>
-                      {({ isActive, isPending }) => (
-                        <span
-                          className={`d-flex align-items-center gap-2 mb-3 isPending ? "pending" : ${
-                            isActive ? "active" : ""
-                          } `}
-                        >
-                          <img src={icon} alt={name} className="" />
-                          <h6 className="pt-1 nav-link-header"> {name} </h6>
-                        </span>
-                      )}
-                    </NavLink>
-                  );
-                })}
+                <img src={arrowUp} alt="" />
+              </div>
+              <div>
+                <img src={arrowDown} alt="" />
               </div>
             </div>
+          </div>
+          {/* MAIN SECTION */}
+          <section className="main-section">
+            <h3 className="mb-4 main-tag">MAIN MENU</h3>
+            <div>
+              {sidebarLinks.map((sidebarLinks) => {
+                const { id, icon, name, path, activeIcon } = sidebarLinks;
+                return (
+                  <NavLink key={id} to={path} end>
+                    {({ isActive }) => (
+                      <section
+                        className={`btn-admin  d-flex gap-2 align-items-center ${
+                          isActive ? "active" : ""
+                        }`}
+                      >
+                        <img
+                          src={isActive ? activeIcon : icon}
+                          className="icon-img"
+                        />
+                        <h6 className="names mt-2"> {name}</h6>
+                      </section>
+                    )}
+                  </NavLink>
+                );
+              })}
+            </div>
           </section>
-          {/* section-2 */}
-          <section>
-            <Navbar />
-            <Outlet />
-          </section>
+          {/* Main ========================== */}
+        </section>
+        {/* section-2 */}
+        <section className="px-lg-5  w-100 nav-out">
+          <NavBar />
+          <Outlet />
         </section>
       </main>
     </>

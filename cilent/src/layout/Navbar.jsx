@@ -1,71 +1,68 @@
-import React from "react";
-import { useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import { Link } from "react-router-dom";
-import arrowdown from "../assets/arrowDown.svg";
-import search from "../assets/searchIcon.svg";
-import notification from "../assets/Bell.svg";
-import messageicon from "../assets/messageIcon.svg";
-import ladypic from "../assets/lady.svg";
-import "../styles/Navbar.css";
-import Offcanvas from "../component/Offcanvas";
-
-const Navbar = () => {
+import React, { useState } from "react";
+import lady from "../assets/lady.svg";
+import searchIcon from "../assets/searchIcon.svg";
+import bell from "../assets/Bell.svg";
+import arrowDown from "../assets/arrow_drop_down_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg";
+import arrowUp from "../assets/arrow_drop_up_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg";
+import messageIcon from "../assets/messageIcon.svg";
+import "../Styles/Navbar.css";
+import AuthDropDown from "../components/AuthDropDown";
+import NavOffcanvas from "../components/NavOffcanvas";
+const NavBar = () => {
+  const [isTrue, setisTrue] = useState(false);
+  const [image, setImage] = useState(arrowDown);
+  function handleReveal() {
+    // isTrue ?  : ;
+    if (isTrue) {
+      setisTrue(false);
+      setImage(arrowDown);
+    } else {
+      setisTrue(true);
+      setImage(arrowUp);
+    }
+  }
   return (
     <>
-      <nav className="d-flex justify-content-between navbar-container container">
-        <div className="d-md-none">
-          {["start"].map((placement, idx) => (
-            <Offcanvas key={idx} placement={placement} name={placement} />
+      <nav className="container position-sticky top-0 m-auto  bg-white">
+        <div className="d-md-flex justify-content-between  mt-3 align-items-center">
+          <div className="d-flex gap-2 align-items-center">
+            <div className="d-md-none d-sm-block">
+            {["start"].map((placement, idx) => (
+            <NavOffcanvas key={idx} placement={placement} name={placement} />
           ))}
+            </div>
+            <form action="" className="form-nav">
+              <input
+                type="search"
+                name=""
+                id=""
+                placeholder="Search"
+                className="search-input"
+              />
+              <img src={searchIcon} alt="" className="search-icon" />
+            </form>
+          </div>
+          <div className="d-none d-md-block">
+            <div className="d-flex justify-content-between gap-4 align-items-center nav-side">
+              <img src={bell} alt="" />
+              <img src={messageIcon} alt="" />
+              <div className="d-flex align-items-center gap-2 ">
+                <img src={lady} alt="" />
+                <h4 className="username mt-1">Mickeydan</h4>
+                <img
+                  onClick={handleReveal}
+                  src={image}
+                  alt=""
+                  className="nav"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <form className="nav-form">
-          <input
-            type="search"
-            name=""
-            id=""
-            placeholder="Search"
-            className="inputs"
-          />
-          {/* <img  className = "position-absolute" src= {searchIcon} alt=""/> */}
-        </form>
-        <div className="d-flex gap-4 align-items-center justify-content-evenly d-none d-md-flex">
-          <div>
-            <img
-              src={notification}
-              alt="notification-img"
-              className="d-none d-lg-block"
-            />
-          </div>
-          <div>
-            <img
-              src={messageicon}
-              alt="message-img"
-              className="d-none d-lg-block"
-            />
-          </div>
-          <div className="d-flex gap-3 align-items-center">
-            <img src={ladypic} alt="lady-pic" className="d-none d-md-block " />
-          </div>
-
-          {/* drop down */}
-          <Dropdown>
-            <Dropdown.Toggle variant="" id="dropdown-basic">
-              mickeydan
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <button className="btn btn-danger">
-                  <Link to={"/auth/signin"}> Log out </Link>
-                </button>
-              </Dropdown.Item>{" "}
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+        <div className="dropDown">{isTrue && <AuthDropDown />}</div>
       </nav>
     </>
   );
 };
 
-export default Navbar;
+export default NavBar;
