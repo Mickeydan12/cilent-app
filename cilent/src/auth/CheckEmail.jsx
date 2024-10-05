@@ -20,7 +20,7 @@ const CheckEmail = () => {
   const [reveal, setReveal] = useState(false);
   const [revealPwd, setRevealPwd] = useState(false);
   const [image, setImage] = useState(eyeOpen);
-  const [imagePwd, setimagePwd] = useState(eyeOpen)
+  const [imagePwd, setimagePwd] = useState(eyeOpen);
   function handleReveal() {
     if (reveal) {
       console.log("it's false");
@@ -36,11 +36,11 @@ const CheckEmail = () => {
     if (revealPwd) {
       console.log("it's false");
       setRevealPwd(false);
-      setimagePwd(eyeCLose)
+      setimagePwd(eyeCLose);
     } else {
       console.log("It's True");
       setRevealPwd(true);
-      setimagePwd(eyeOpen)
+      setimagePwd(eyeOpen);
     }
   }
   return (
@@ -72,8 +72,13 @@ const CheckEmail = () => {
                   placeholder="Confirm Password"
                 />
                 <p className="text-danger">{errors.confirmPwd?.message}</p>
-                <img onClick={handleRevealPwd} src={imagePwd} className="pass-icon" />
+                <img
+                  onClick={handleRevealPwd}
+                  src={imagePwd}
+                  className="pass-icon"
+                />
               </div>
+
               <button className="sign-in mt-4">Reset Password</button>
             </div>
           </form>
